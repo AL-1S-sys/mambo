@@ -1,0 +1,493 @@
+/* =========================================
+   1. THE CORE ENGINE (Variables & Reset)
+   ========================================= */
+:root {
+    --accent-red: #ff3e3e;
+    --bg-dark: #0a0a0a;
+    --card-bg: rgba(22, 22, 22, 0.8);
+    --text-main: #ffffff;
+    --text-dim: #a0a0a0;
+    --glow: 0 0 20px rgba(255, 62, 62, 0.4);
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. NAVIGATION (Glow Mode)
+   ========================================= */
+header {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    border-bottom: 2px solid var(--accent-red);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* This gives space between the image and the text */
+    font-weight: bold;
+    color: var(--accent-red);
+    letter-spacing: 3px;
+    text-shadow: var(--glow);
+    font-size: 1.5rem;
+}
+
+.nav-icon {
+    width: 40px; 
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px; /* Optional: gives the logo slightly rounded corners */
+    filter: drop-shadow(0 0 5px var(--accent-red));
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent-red);
+    text-shadow: var(--glow);
+}
+
+/* The animated underline */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--accent-red);
+    transition: var(--transition);
+    box-shadow: var(--glow);
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* =========================================
+   3. UNIVERSAL HERO LAYOUT (Centered Style)
+   ========================================= */
+.container {
+    padding: 80px 10%;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.highlight {
+    color: var(--accent-red);
+    text-shadow: var(--glow);
+}
+
+/* =========================================
+   4. INDEX (Profile Image Styling)
+   ========================================= */
+.profile-img-pro {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20% 50% 20% 50%;
+    border: 2px solid var(--accent-red);
+    transition: var(--transition);
+    margin-bottom: 20px;
+}
+
+.profile-img-pro:hover {
+    transform: scale(1.05) rotate(3deg);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 62, 62, 0.6);
+}
+
+/* =========================================
+   5. PORTFOLIO (Grid & Cards)
+   ========================================= */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.project-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 62, 62, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.project-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--accent-red);
+    box-shadow: 0 15px 40px rgba(255, 62, 62, 0.2);
+}
+
+.card-header {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-red);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 62, 62, 0.1);
+}
+
+.project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.6s ease;
+}
+
+.project-card:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.card-body { padding: 25px; }
+.card-body h3::before { content: "const "; color: #569cd6; font-size: 0.9rem; }
+
+.tech-stack {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.tech-stack span {
+    font-family: monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    background: rgba(86, 156, 214, 0.1);
+    color: #569cd6;
+    border: 1px solid rgba(86, 156, 214, 0.3);
+    border-radius: 4px;
+}
+
+/* =========================================
+   6. CONTACT (Terminal Protocol)
+   ========================================= */
+.terminal {
+    width: 100%;
+    max-width: 650px;
+    background: #121212;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 62, 62, 0.2);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.term-head {
+    background: #252525;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.term-body { padding: 40px; text-align: left; }
+
+.contact-link {
+    display: block;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    margin-top: 12px;
+    color: var(--text-main);
+    text-decoration: none;
+    border-radius: 6px;
+    border-left: 4px solid transparent;
+    transition: var(--transition);
+}
+
+.contact-link:hover {
+    background: rgba(255, 62, 62, 0.05);
+    border-left: 4px solid var(--accent-red);
+    padding-left: 28px;
+    color: var(--accent-red);
+    text-shadow: 0 0 10px rgba(255, 62, 62, 0.3);
+}
+
+/* =========================================
+   7. UTILITY CLASSES
+   ========================================= */
+.btn-pro {
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--accent-red);
+    color: white;
+    box-shadow: var(--glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(255, 62, 62, 0.6);
+}
+
+.btn-secondary {
+    border: 1px solid white;
+    color: white;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: black;
+}
+.status-badge {
+    background: rgba(255, 62, 62, 0.05);
+    border: 1px solid rgba(255, 62, 62, 0.2);
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-red);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* This makes a little blinking dot like a real server status */
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-red);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+/* =========================================
+   8. ABOUT PAGE SPECIAL STYLES
+   ========================================= */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 50px;
+    text-align: left;
+    align-items: start;
+    width: 100%;
+}
+
+.about-text p {
+    color: var(--text-dim);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.interests-list {
+    list-style: none;
+    color: var(--text-main);
+    font-family: 'Courier New', monospace;
+}
+
+.interests-list li {
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+
+.interests-list li:hover {
+    color: var(--accent-red);
+    padding-left: 10px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================
+   9. MOBILE OPTIMIZATION (The "Responsive" Patch)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Stack the About & Portfolio Grids */
+    .about-grid, .project-grid {
+        grid-template-columns: 1fr; /* Force one column */
+        gap: 30px;
+    }
+
+    /* 2. Adjust Hero Text for smaller screens */
+    .container h1 {
+        font-size: 2.2rem !important; /* Smaller title so it doesn't wrap weirdly */
+    }
+
+    .profile-img-pro, .hero-logo {
+        width: 180px;
+        height: 180px;
+    }
+
+    /* 3. Navigation - Make it scrollable if it gets too tight */
+    .navbar {
+        flex-direction: column; /* Stack logo above links */
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .nav-links {
+        gap: 15px;
+        font-size: 0.8rem;
+    }
+
+    /* 4. Terminal Padding - Make it fit on tiny screens */
+    .term-body {
+        padding: 20px;
+    }
+
+    .contact-link {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+
+    .status-badge {
+        font-size: 0.7rem;
+    }
+}
+
+/* Extra small screens (Phones like iPhone SE) */
+@media (max-width: 480px) {
+    .nav-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2x2 grid for menu items */
+        text-align: center;
+        width: 100%;
+    }
+}
+/* =========================================
+   UNIVERSAL RESPONSIVENESS
+   ========================================= */
+
+/* TABLETS & SMALL LAPTOPS (e.g., iPad) */
+@media (max-width: 1024px) {
+    .about-grid {
+        gap: 20px;
+    }
+    .hero-logo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* SMARTPHONES (e.g., iPhone 13, 14, 15, Android) */
+@media (max-width: 768px) {
+    /* Stack the Navigation */
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .nav-links {
+        margin-top: 15px;
+        gap: 10px;
+        flex-wrap: wrap; /* Wraps links if they are too long */
+        justify-content: center;
+    }
+
+    /* Stack all Grids (About, Portfolio, etc.) */
+    .about-grid, .project-grid {
+        grid-template-columns: 1fr !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Adjust Font Sizes so they don't overflow */
+    h1 {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+    }
+
+    .hero-logo {
+        width: 180px;
+        height: 180px;
+    }
+
+    /* Terminal handling */
+    .terminal {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .term-body {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* VERY SMALL PHONES (e.g., iPhone SE, older Androids) */
+@media (max-width: 380px) {
+    .nav-links a {
+        font-size: 0.75rem;
+        padding: 5px;
+    }
+    
+    h1 {
+        font-size: 1.8rem !important;
+    }
+}
